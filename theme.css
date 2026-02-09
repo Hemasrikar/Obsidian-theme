@@ -217,34 +217,34 @@ settings:
     id: h1-size
     title: H1 size
     type: variable-text
-    default: 2.5em
+    default: 2.2em
   -
     id: h2-size
     title: H2 size
     type: variable-text
-    default: 2.2em
+    default: 2.0em
   - 
     id: h3-size
     title: H3 size
     type: variable-text
-    default: 2em
+    default: 1.8em
   -
     id: h4-size
     title: H4 size
     type: variable-text
-    default: 1.8em
+    default: 1.6em
   -
 
     id: h5-size
     title: H5 size
     type: variable-text
-    default: 1.6em
+    default: 1.4em
 
   - 
     id: h6-size
     title: H6 size
     type: variable-text
-    default: 1.4em
+    default: 1.2em
 
 */
 
