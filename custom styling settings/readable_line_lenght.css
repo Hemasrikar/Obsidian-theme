@@ -1,0 +1,59 @@
+/* =========================================================
+   Style Settings: Readable Line Width
+   ========================================================= */
+
+/* @settings
+name: Readable Line Width
+id: readable-line-width
+settings:
+  - id: rlw-max-width
+    title: Max line width
+    description: Controls the readable line width of editor and preview
+    type: variable-text
+    default: 70ch
+
+  - id: rlw-preview-width
+    title: Preview width (optional)
+    description: Overrides width in Reading Mode only
+    type: variable-text
+    default: 68ch
+
+  - id: rlw-editor-width
+    title: Editor width (optional)
+    description: Overrides width in Live Preview / Source Mode only
+    type: variable-text
+    default: 72ch
+*/
+
+/* ======================
+   Global default
+   ====================== */
+.markdown-source-view,
+.markdown-preview-view {
+  max-width: var(--rlw-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ======================
+   Editor only
+   ====================== */
+.markdown-source-view {
+  max-width: var(--rlw-editor-width);
+}
+
+/* ======================
+   Reading mode only
+   ====================== */
+.markdown-preview-view {
+  max-width: var(--rlw-preview-width);
+}
+
+/* Prevent overflow from math & tables */
+.markdown-preview-view {
+  overflow-wrap: break-word;
+}
+
+.markdown-preview-view table {
+  max-width: 100%;
+}
