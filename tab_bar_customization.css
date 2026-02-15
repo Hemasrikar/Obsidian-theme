@@ -1,14 +1,8 @@
 /* @settings
 
-name: Tab Bar Positioning
-id: tab-bar-positioning
+name: Floating Tab Bar
+id: floating-tab-bar
 settings:
-    -
-        id: tab-bar-offset-top
-        title: Tab Bar Vertical Position
-        description: Distance from the top in pixels (0 = default position)
-        type: variable-text
-        default: 0px
     -
         id: tab-bar-translucent
         title: Tab Bar Translucency
@@ -16,15 +10,35 @@ settings:
         type: class-toggle
         default: false
     -
-        id: tab-bar-gap
-        title: Gap Between Tabs
-        description: Space between individual tabs
+        id: tab-title-font-size
+        title: Tab Title Font Size
+        description: Font size for the tab title bar text
         type: variable-number-slider
-        default: 2
-        min: 0
-        max: 10
+        default: 14
+        min: 10
+        max: 24
         step: 1
         format: px
+    -
+        id: tab-title-font-weight
+        title: Tab Title Font Weight
+        description: Font weight for the tab title bar text (400 = normal, 700 = bold)
+        type: variable-number-slider
+        default: 500
+        min: 300
+        max: 900
+        step: 50
+        format: 
+    -
+        id: tab-title-text-shadow
+        title: Tab Title Text Shadow Strength
+        description: Strength of the text shadow (higher = more visible)
+        type: variable-number-slider
+        default: 0.2
+        min: 0
+        max: 1
+        step: 0.05
+        format: 
 
 */
 
@@ -33,15 +47,56 @@ settings:
    ============================================ */
 
 body {
-    --tab-bar-offset-top: 0px;
-    --tab-bar-gap: 2px;
+    --tab-title-font-size: 14px;
+    --tab-title-font-weight: 500;
+    --tab-title-text-shadow: 1;
 }
 
-/* VERTICAL POSITIONING */
+/* MAKE TITLE BAR OVERLAY ON CONTENT - ONLY FOR MARKDOWN FILES */
 
-.workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container {
-    position: relative;
-    top: var(--tab-bar-offset-top);
+.workspace-leaf-content:has(.markdown-source-view) .view-header,
+.workspace-leaf-content:has(.markdown-reading-view) .view-header,
+.workspace-leaf-content:has(.markdown-preview-view) .view-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.workspace-leaf-content:has(.markdown-source-view) .view-content,
+.workspace-leaf-content:has(.markdown-reading-view) .view-content,
+.workspace-leaf-content:has(.markdown-preview-view) .view-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Make title bar text white for better visibility */
+.view-header-title,
+.view-header-title *,
+.view-header-breadcrumb,
+.view-header-breadcrumb *,
+.view-header-nav-buttons .clickable-icon,
+.view-actions .clickable-icon {
+    color: white !important;
+    font-size: var(--tab-title-font-size) !important;
+    font-weight: var(--tab-title-font-weight) !important;
+    text-shadow: 
+        0 0 calc(3px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 1),
+        0 0 calc(6px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 1),
+        0 0 calc(10px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 0.8),
+        0 calc(2px * var(--tab-title-text-shadow)) calc(4px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Make icons white with shadow */
+.view-header-icon svg,
+.view-header-nav-buttons svg,
+.view-actions svg {
+    color: white !important;
+    filter: 
+        drop-shadow(0 0 calc(3px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 1))
+        drop-shadow(0 0 calc(6px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 1))
+        drop-shadow(0 calc(2px * var(--tab-title-text-shadow)) calc(4px * var(--tab-title-text-shadow)) rgba(0, 0, 0, 0.9));
 }
 
 /* TRANSLUCENCY TOGGLE - ONLY TAB BAR AND TITLE BAR */
@@ -74,17 +129,6 @@ body.tab-bar-translucent .workspace-tab-header-container::after {
     background-color: transparent !important;
     background: transparent !important;
     display: none !important;
-}
-
-/* Adjust content area to compensate for offset */
-.workspace-split.mod-root > .workspace-tabs .workspace-tab-container {
-    margin-top: var(--tab-bar-offset-top);
-}
-
-/*  TAB SPACING */
-
-.workspace-tab-header-container-inner {
-    gap: var(--tab-bar-gap);
 }
 
 /* SMOOTH TRANSITIONS */
