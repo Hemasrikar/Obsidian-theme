@@ -44,23 +44,29 @@ body {
     top: var(--tab-bar-offset-top);
 }
 
-/* TRANSLUCENCY TOGGLE */
+/* TRANSLUCENCY TOGGLE - ONLY TAB BAR AND TITLE BAR */
 
-body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs,
-body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs *,
+/* Make tab bar transparent */
+body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container,
+body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container * {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Make title bar transparent */
 body.tab-bar-translucent .workspace-leaf-content .view-header,
 body.tab-bar-translucent .workspace-leaf-content .view-header * {
     background-color: transparent !important;
     background: transparent !important;
 }
 
-/* Apply opacity to main containers */
+/* Apply opacity to containers only */
 body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container,
 body.tab-bar-translucent .workspace-leaf-content .view-header {
     opacity: 0.8;
 }
 
-/* Minimal theme specific - remove pseudo-element backgrounds that cause black spots */
+/* Remove Minimal theme pseudo-elements */
 body.tab-bar-translucent .workspace-tab-header::before,
 body.tab-bar-translucent .workspace-tab-header::after,
 body.tab-bar-translucent .workspace-tab-header-container::before,
