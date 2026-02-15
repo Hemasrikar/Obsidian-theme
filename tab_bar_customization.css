@@ -37,63 +37,37 @@ body {
     --tab-bar-gap: 2px;
 }
 
-/* ============================================
-   VERTICAL POSITIONING
-   Move tab bar down by specified offset
-   ONLY in the main editor area (not sidebars)
-   ============================================ */
+/* VERTICAL POSITIONING */
 
 .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container {
     position: relative;
     top: var(--tab-bar-offset-top);
 }
 
-/* ============================================
-   TRANSLUCENCY TOGGLE
-   Make tab bar transparent when enabled
-   ============================================ */
+/* TRANSLUCENCY TOGGLE */
 
-/* Make the tab bar container transparent */
-body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container,
-body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container * {
-    background-color: transparent !important;
-}
-
-body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container {
-    opacity: 0.8;
-}
-
-/* Make the view header (tab title bar) transparent */
-body.tab-bar-translucent .workspace-leaf-content .view-header {
-    background-color: transparent !important;
-    opacity: 0.8;
-}
-
+body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs,
+body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs *,
+body.tab-bar-translucent .workspace-leaf-content .view-header,
 body.tab-bar-translucent .workspace-leaf-content .view-header * {
     background-color: transparent !important;
+    background: transparent !important;
 }
 
-/* Make the view header background and actions transparent */
-body.tab-bar-translucent .view-header-title-container,
-body.tab-bar-translucent .view-header-nav-buttons,
-body.tab-bar-translucent .view-actions {
-    background-color: transparent !important;
+/* Apply opacity to main containers */
+body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs .workspace-tab-header-container,
+body.tab-bar-translucent .workspace-leaf-content .view-header {
+    opacity: 0.8;
 }
 
-/* Make workspace tabs background transparent */
-body.tab-bar-translucent .workspace-split.mod-root > .workspace-tabs {
+/* Minimal theme specific - remove pseudo-element backgrounds that cause black spots */
+body.tab-bar-translucent .workspace-tab-header::before,
+body.tab-bar-translucent .workspace-tab-header::after,
+body.tab-bar-translucent .workspace-tab-header-container::before,
+body.tab-bar-translucent .workspace-tab-header-container::after {
     background-color: transparent !important;
-}
-
-/* Target all possible remaining backgrounds */
-body.tab-bar-translucent .workspace-leaf,
-body.tab-bar-translucent .workspace-leaf-content,
-body.tab-bar-translucent .mod-top,
-body.tab-bar-translucent .workspace-tab-header-container-inner,
-body.tab-bar-translucent .view-header-title,
-body.tab-bar-translucent .view-header-icon,
-body.tab-bar-translucent .clickable-icon {
-    background-color: transparent !important;
+    background: transparent !important;
+    display: none !important;
 }
 
 /* Adjust content area to compensate for offset */
@@ -101,18 +75,13 @@ body.tab-bar-translucent .clickable-icon {
     margin-top: var(--tab-bar-offset-top);
 }
 
-/* ============================================
-   TAB SPACING
-   Apply to all tab bars
-   ============================================ */
+/*  TAB SPACING */
 
 .workspace-tab-header-container-inner {
     gap: var(--tab-bar-gap);
 }
 
-/* ============================================
-   SMOOTH TRANSITIONS
-   ============================================ */
+/* SMOOTH TRANSITIONS */
 
 .workspace-tab-header-container,
 .workspace-tab-container {
